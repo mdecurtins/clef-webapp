@@ -1,19 +1,18 @@
-# Based on https://medium.com/ai2-blog/dockerizing-a-react-application-3563688a2378
+# Based on http://mherman.org/blog/2017/12/07/dockerizing-a-react-app/#.Wm5EI6inGUk
 FROM node:9.3-alpine
 
-ENV NPM_CONFIG_LOGLEVEL warn
+# Set working dir
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-RUN npm install -g serve
+# Add files to image
+ADD . /usr/src/app
 
-CMD serve -s build
+# Add node binaries to path
+ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
-EXPOSE 5000
-
-COPY package.json package.json
-COPY npm-shrinkwrap.json npm-shrinkwrap.json
-
+# Install dependencies
+ADD package.json /usr/src/app/package.json
 RUN npm install
 
-COPY . .
-
-RUN npm run build --production
+CMD [ "npm", "start" ]
