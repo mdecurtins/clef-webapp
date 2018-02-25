@@ -15,4 +15,7 @@ ENV PATH /usr/src/app/node_modules/.bin:$PATH
 ADD package.json /usr/src/app/package.json
 RUN npm install
 
+# Install Flat.io embed
+RUN npm install flat-embed
+
 CMD [ "npm", "start" ]
