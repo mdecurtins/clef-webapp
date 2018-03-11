@@ -10,11 +10,6 @@ export default class FlatEmbed extends React.Component {
     }
 
 
-    constructor() {
-        
-    }
-
-
     /**
      * Creates a container for a Flat.io embedded editor
      */
