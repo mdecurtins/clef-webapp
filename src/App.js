@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import Header from './components/Header/Header';
+import FlatEmbed from './components/FlatEmbed/FlatEmbed';
 import logo from './logo.svg';
 import './App.css';
+
 
 class App extends Component {
   render() {
@@ -13,6 +16,8 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+          <Header name="Clef Webapp" />
+          <FlatEmbed/>
       </div>
     );
   }
