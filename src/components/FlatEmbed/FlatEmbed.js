@@ -32,11 +32,6 @@ export default class FlatEmbed extends React.Component {
     }
 
     render() {
-        return (
-            <div>
-                <h3>Enter a query in the editor below:</h3>
-                <div id="flat-container"></div>
-            </div>
-        );
+
     }
 }
