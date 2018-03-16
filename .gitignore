@@ -5,6 +5,7 @@
 
 # testing
 /coverage
+/sample_data
 
 # production
 /build
