@@ -18,4 +18,9 @@ RUN npm install
 # Install Flat.io embed
 RUN npm install flat-embed
 
+# Install Redux for React
+RUN npm install --save redux
+RUN npm install --save react-redux
+RUN npm install --save-dev redux-devtools
+
 CMD [ "npm", "start" ]
