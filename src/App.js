@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import Header from './components/Header/Header';
-import FlatEmbed from './components/FlatEmbed/FlatEmbed';
+import FlatEmbedContainer from './components/FlatEmbed/FlatEmbedContainer';
 import logo from './logo.svg';
 import './App.css';
+import initialState from './store/initialState';
+import { createStore } from 'redux';
+import appReducer from './reducers/ClefReducers';
+import { Provider } from 'react-redux';
 
+let state = initialState;
+const store = createStore( appReducer, initialState );
+
+Window.appStore = store;
 
 class App extends Component {
   render() {
@@ -17,7 +25,9 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
           <Header name="Clef Webapp" />
-          <FlatEmbed/>
+          <Provider store={store}>
+              <FlatEmbedContainer/>
+          </Provider>
       </div>
     );
   }
