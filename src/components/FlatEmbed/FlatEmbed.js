@@ -18,11 +18,6 @@ class FlatEmbed extends React.Component {
         flatEmbed( this.embed );
     }
 
-
-    constructor( props ) {
-        super( props );
-    }
-
     /**
      * Creates a container for a Flat.io embedded editor
      */
