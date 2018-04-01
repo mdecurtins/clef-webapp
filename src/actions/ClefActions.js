@@ -97,6 +97,21 @@ export const previousQuery = function ( query ) {
 
 
 /**
+ * Action to set whether or not a search is currently being executed.
+ *
+ * @since 1.0.0
+ * @param {boolean} searching
+ * @returns {{type: string, payload: boolean}}
+ */
+export const searching = function ( searching = false ) {
+    return {
+        type: actions.SET_SEARCHING,
+        payload: searching
+    };
+};
+
+
+/**
  * Action to set whether or not the currently displayed search results have been filtered.
  *
  * @since 1.0.0
@@ -146,17 +161,5 @@ export const view = function ( value ) {
 };
 
 
-/**
- * Action to set whether or not a search is currently being executed.
- *
- * @since 1.0.0
- * @param {boolean} searching
- * @returns {{type: string, payload: boolean}}
- */
-export const searching = function ( searching = false ) {
-    return {
-        type: actions.SET_SEARCHING,
-        payload: searching
-    };
-};
+
 
