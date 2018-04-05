@@ -1,15 +1,16 @@
 /**
- * Action constants.
- * @type {{ADD_ERROR: string, ADD_FACET: string, CLEAR_ERROR: string, CLEAR_FACET: string, CLEAR_FILTERS: string, CLEAR_RESULTS: string, RENDER_RESULTS: string, SET_FILTERED_RESULTS: string, SET_FILTERS: string, SET_FILTER_STATUS: string, SET_FLAT_EMBED: string, SET_PREV_QUERY: string, SET_RESULTS: string, SET_RESULTS_VIEW: string, SET_SEARCHING: string, SUBMIT_QUERY: string}}
+ * Action creators.
+ * @type {{ADD_ERROR: string, ADD_FACET: string, CLEAR_ALL_ERRORS: string, CLEAR_ERROR: string, CLEAR_FACET: string, CLEAR_FILTERED_RESULTS: string, CLEAR_FILTERS: string, CLEAR_RESULTS: string, SET_FILTERED_RESULTS: string, SET_FILTERS: string, SET_FILTER_STATUS: string, SET_FLAT_EMBED: string, SET_PREV_QUERY: string, SET_RESULTS: string, SET_RESULTS_VIEW: string, SET_SEARCHING: string}}
  */
 export const actions = {
     ADD_ERROR: 'ADD_ERROR',
     ADD_FACET: 'ADD_FACET',
+    CLEAR_ALL_ERRORS: 'CLEAR_ALL_ERRORS',
     CLEAR_ERROR: 'CLEAR_ERROR',
     CLEAR_FACET: 'CLEAR_FACET',
+    CLEAR_FILTERED_RESULTS: 'CLEAR_FILTERED_RESULTS',
     CLEAR_FILTERS: 'CLEAR_FILTERS',
     CLEAR_RESULTS: 'CLEAR_RESULTS',
-    RENDER_RESULTS: 'RENDER_RESULTS',
     SET_FILTERED_RESULTS: 'SET_FILTERED_RESULTS',
     SET_FILTERS: 'SET_FILTERS',
     SET_FILTER_STATUS: 'SET_FILTER_STATUS',
@@ -17,8 +18,7 @@ export const actions = {
     SET_PREV_QUERY: 'SET_PREV_QUERY',
     SET_RESULTS: 'SET_RESULTS',
     SET_RESULTS_VIEW: 'SET_RESULTS_VIEW',
-    SET_SEARCHING: 'SET_SEARCHING',
-    SUBMIT_QUERY: 'SUBMIT_QUERY'
+    SET_SEARCHING: 'SET_SEARCHING'
 };
 
 
@@ -50,6 +50,20 @@ export const addError = function ( msg ) {
 
 
 /**
+ * Action to clear all errors.
+ *
+ * @since 1.0.0
+ * @returns {{type: string, payload: Array}}
+ */
+export const clearAllErrors = function () {
+    return {
+        type: actions.CLEAR_ALL_ERRORS,
+        payload: []
+    }
+};
+
+
+/**
  * Action to clear the error at errIndex.
  *
  * @since 1.0.0
@@ -60,6 +74,20 @@ export const clearError = function ( errIndex ) {
     return {
         type: actions.CLEAR_ERROR,
         payload: errIndex
+    };
+};
+
+
+/**
+ * Action to clear all filtered results.
+ *
+ * @since 1.0.0
+ * @returns {{type: string, payload: Array}}
+ */
+export const clearFilteredResults = function () {
+    return {
+        type: actions.CLEAR_FILTERED_RESULTS,
+        payload: []
     };
 };
 
