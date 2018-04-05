@@ -8,7 +8,7 @@ import { createStore } from 'redux';
 import appReducer from './reducers/ClefReducers';
 import { Provider } from 'react-redux';
 
-let state = initialState;
+
 const store = createStore( appReducer, initialState );
 
 Window.appStore = store;
