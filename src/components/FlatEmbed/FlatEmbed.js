@@ -14,8 +14,7 @@ class FlatEmbed extends React.Component {
         this.editor();
 
         // Dispatch an action to store the Flat Embed object instance in the application state.
-        const { flatEmbed } = this.props;
-        flatEmbed( this.embed );
+        this.props.setFlatEmbed( this.embed );
     }
 
     /**
@@ -47,6 +46,7 @@ class FlatEmbed extends React.Component {
     }
 
     render() {
+        // Render a container and embed the Flat.io editor after this component mounts.
         return (
             <div id="flat-container"></div>
         );
@@ -61,7 +61,9 @@ function mapStateToProps( state ) {
 
 function mapDispatchToProps( dispatch ) {
     return {
-        flatEmbed
+        setFlatEmbed: function ( embed ) {
+            dispatch( flatEmbed( embed ) );
+        }
     };
 }
 
