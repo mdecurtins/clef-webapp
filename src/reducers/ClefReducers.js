@@ -64,7 +64,7 @@ export const facets = function ( state = [], action ) {
  * @returns {boolean}
  */
 export const filtered = function ( state = false, action ) {
-    if ( action === actions.SET_FILTER_STATUS ) {
+    if ( action.type === actions.SET_FILTER_STATUS ) {
         return action.payload;
     }
     return state;
@@ -80,7 +80,7 @@ export const filtered = function ( state = false, action ) {
  * @returns {Array}
  */
 export const filteredResults = function ( state = [], action ) {
-    if ( action === actions.SET_FILTERED_RESULTS ) {
+    if ( action.type === actions.SET_FILTERED_RESULTS ) {
         return action.payload;
     }
     return state;
@@ -96,7 +96,7 @@ export const filteredResults = function ( state = [], action ) {
  * @returns {Array}
  */
 export const filtersApplied = function ( state = [], action ) {
-    if ( action === actions.SET_FILTERS ) {
+    if ( action.type === actions.SET_FILTERS ) {
         return action.payload;
     }
     return state;
@@ -112,7 +112,11 @@ export const filtersApplied = function ( state = [], action ) {
  * @returns {object|null}
  */
 export const flatEmbed = function ( state = null, action ) {
-    if ( action === actions.SET_FLAT_EMBED ) {
+    console.log( 'flatEmbed reducer invoked.');
+    if ( action.type === actions.SET_FLAT_EMBED ) {
+        console.log( 'Action is: ' + action.type );
+        console.log( 'Payload is: ' );
+        console.log( action.payload );
         return action.payload;
     }
     return state;
@@ -128,7 +132,7 @@ export const flatEmbed = function ( state = null, action ) {
  * @returns {string}
  */
 export const previousQuery = function ( state = "", action ) {
-    if ( action === actions.SET_PREV_QUERY ) {
+    if ( action.type === actions.SET_PREV_QUERY ) {
         return action.payload;
     }
     return state;
@@ -144,7 +148,7 @@ export const previousQuery = function ( state = "", action ) {
  * @returns {Array}
  */
 export const results = function ( state = [], action ) {
-    if ( action === actions.SET_RESULTS ) {
+    if ( action.type === actions.SET_RESULTS ) {
         return action.payload;
     }
     return state;
@@ -160,7 +164,7 @@ export const results = function ( state = [], action ) {
  * @returns {boolean}
  */
 export const searching = function ( state = false, action ) {
-    if ( action === actions.SET_SEARCHING ) {
+    if ( action.type === actions.SET_SEARCHING ) {
         return true;
     }
     return state;
@@ -176,7 +180,7 @@ export const searching = function ( state = false, action ) {
  * @returns {number}
  */
 export const view = function ( state = 0, action ) {
-    if ( action === actions.SET_RESULTS_VIEW ) {
+    if ( action.type === actions.SET_RESULTS_VIEW ) {
         return parseInt( action.payload );
     }
     return state;
