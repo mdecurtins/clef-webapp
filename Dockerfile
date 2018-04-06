@@ -22,5 +22,6 @@ RUN npm install flat-embed
 RUN npm install --save redux
 RUN npm install --save react-redux
 RUN npm install --save-dev redux-devtools
+RUN npm install --save redux-thunk
 
 CMD [ "npm", "start" ]
