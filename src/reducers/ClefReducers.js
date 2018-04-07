@@ -112,11 +112,7 @@ export const filtersApplied = function ( state = [], action ) {
  * @returns {object|null}
  */
 export const flatEmbed = function ( state = null, action ) {
-    console.log( 'flatEmbed reducer invoked.');
     if ( action.type === actions.SET_FLAT_EMBED ) {
-        console.log( 'Action is: ' + action.type );
-        console.log( 'Payload is: ' );
-        console.log( action.payload );
         return action.payload;
     }
     return state;
