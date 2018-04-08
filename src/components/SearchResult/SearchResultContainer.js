@@ -1,14 +1,16 @@
 import React from 'react';
-import SearchResult from 'SearchResult';
+import SearchResult from './SearchResult';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 class SearchResultContainer extends React.Component {
 
-    displayResults( results ) {
-        results.map( function ( result ) {
+    displayResults() {
+        const results = this.props.results;
+        console.log( 'displayResults: logging results' );
+        console.log( results );
+        return results.map( function ( result ) {
            return (
-               <SearchResult resultData={result} />
+               <SearchResult key={result.ranking} resultData={result} />
            );
         });
     }
@@ -16,7 +18,7 @@ class SearchResultContainer extends React.Component {
     render() {
         return (
             <div id="search-results">
-                {this.displayResults( this.props.results )}
+                {this.displayResults()}
             </div>
         );
     }
@@ -34,4 +36,4 @@ function mapDispatchToProps( dispatch ) {
     
 }
 
-export default connect( mapStateToProps, mapDispatchToProps )( SearchResultContainer );
+export default connect( mapStateToProps, null )( SearchResultContainer );
