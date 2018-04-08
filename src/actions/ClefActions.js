@@ -100,8 +100,6 @@ export const clearFilteredResults = function () {
  * @returns {{type: string, payload: object}}
  */
 export const flatEmbed = function ( embed ) {
-    console.log( 'Setting Flat embed' );
-    console.log( embed );
     return {
         type: actions.SET_FLAT_EMBED,
         payload: embed
@@ -185,6 +183,56 @@ export const view = function ( value ) {
     return {
         type: actions.SET_RESULTS_VIEW,
         payload: val
+    };
+};
+
+
+/*** Thunks ***/
+
+/**
+ *
+ * @param {Embed} flatEditor
+ * @returns {Function}
+ */
+export const getMusicData = function ( flatEditor ) {
+    return function ( dispatch ) {
+        if ( flatEditor === null || typeof flatEditor === 'undefined' ) {
+            dispatch( addError( 'Flat Embed instance is either null or undefined.' ) );
+        } else {
+            console.log( 'Attempting to get MusicXML...' );
+            flatEditor.getMusicXML()
+                .then( function ( xml ) {
+                    console.log( 'Got MusicXML: ' );
+                    console.log( xml );
+                    dispatch( previousQuery( xml ) );
+                })
+                .catch( function ( err ) {
+                    /** @var {Error} err */
+                    console.log( 'An error occurred.' );
+                    dispatch( addError( err.message ) );
+                });
+        }
+    };
+};
+
+
+export const fetchResults = function () {
+    return function ( dispatch, getState ) {
+        fetch(  '../sample_data/sample_data.json', {
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json'} } )
+            .then( function ( response ) {
+                console.log( 'Got a response, returning json...' );
+                console.log( response );
+                return response.json();
+            })
+            .then( function ( json ) {
+                console.log( 'Logging results...' );
+                console.log( json );
+            })
+            .catch( function ( err ) {
+                console.log( 'Error occurred.' );
+                console.log( err );
+            });
     };
 };
 
