@@ -29,7 +29,7 @@ export const errors = function ( state = [], action ) {
 
 
 /**
- * Adds or removes a facet from the array of facets that should be displayed in the left nav for filtering results.
+ * Sets the array of facets that should be displayed in the left nav for filtering results.
  *
  * @since 1.0.0
  * @param {Array} state The current value of the facets key in the application state object.
@@ -37,21 +37,10 @@ export const errors = function ( state = [], action ) {
  * @returns {Array}
  */
 export const facets = function ( state = [], action ) {
-    switch ( action.type ) {
-        case actions.ADD_FACET:
-            return [
-                ...state,
-                action.payload
-            ];
-        case actions.CLEAR_FACET:
-            return state.filter(
-                function ( facet, i ) {
-                    return i !== action.payload;
-                }
-            );
-        default:
-            return state;
+    if ( action.type === actions.SET_FACETS ) {
+        return action.payload;
     }
+    return state;
 };
 
 
