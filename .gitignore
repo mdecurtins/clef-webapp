@@ -5,7 +5,7 @@
 
 # testing
 /coverage
-/src/sample_data/
+/public/sample_data/
 
 # production
 /build
