@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './components/Header/Header';
 import FlatEmbedContainer from './components/FlatEmbed/FlatEmbedContainer';
+import FacetsContainer from './components/Facets/FacetsContainer';
 import SearchResultContainer from './components/SearchResult/SearchResultContainer';
 import logo from './logo.svg';
 import './App.css';
@@ -19,7 +20,11 @@ class App extends Component {
         </p>
           <Header name="Clef Webapp" />
           <FlatEmbedContainer/>
-          <SearchResultContainer/>
+          <div id="clef-results-container">
+              <FacetsContainer/>
+              <SearchResultContainer/>
+          </div>
+
       </div>
     );
   }
