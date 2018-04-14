@@ -92,6 +92,20 @@ export const clearFilteredResults = function () {
 
 
 /**
+ * Action to clear all filters.
+ *
+ * @since 1.0.0
+ * @return {{type: string, payload: Array}}
+ */
+export const clearFilters = function () {
+    return {
+        type: actions.CLEAR_FILTERS,
+        payload: []
+    };
+};
+
+
+/**
  * Action to store the current Flat.io Embed instance into the application state object.
  *
  * @since 1.0.0
@@ -132,6 +146,102 @@ export const searching = function ( searching = false ) {
     return {
         type: actions.SET_SEARCHING,
         payload: searching
+    };
+};
+
+
+/**
+ * Creates a new Facet object.
+ *
+ * @since 1.0.0
+ * @param {string} group The header under which this facet should be grouped.
+ * @param {string} label The label text that should be displayed next to the facet checkbox in the faceted search form.
+ * @param {string} value The value that should be used to filter the search results.
+ * @return {{facet_group: string, facet_num_matches: number, facet_label: string, facet_value: string}}
+ */
+const newFacet = function ( group = "", label = "", value = "" ) {
+    return {
+        "facet_group": group,
+        "facet_num_matches": 1,
+        "facet_label": label,
+        "facet_value": value
+    };
+};
+
+
+/**
+ * Updates a Facet object's number of matches if the facet exists; adds the facet if it does not.
+ *
+ * @since 1.0.0
+ * @param {Array} facets The array of facets to be stored in application state.
+ * @param {string} group The header under which this facet should be grouped.
+ * @param {string} value The value that should be used to filter the search results, also used here to match an existing
+ *  facet.
+ * @return {Array} The mutated array of facets to be stored in application state.
+ */
+const updateFacet = function ( facets, group, value ) {
+    if ( facets.length === 0 ) {
+        facets.push( newFacet( group, value, value ) );
+    } else {
+        let found = false;
+        for ( let i = 0; i < facets.length; i++ ) {
+            if ( facets[i].facet_value === value ) {
+                found = true;
+                facets[i].facet_num_matches++;
+            }
+        }
+        if ( ! found ) {
+            facets.push( newFacet( group, value, value ) );
+        }
+    }
+    return facets;
+};
+
+
+/**
+ * Builds an array of Facet objects from the facetable properties of the search results and sets it as the action payload.
+ *
+ * @since 1.0.0
+ * @param {Array} searchResults The array of search results returned by the server.
+ * @return {{type: string, payload: Array}}
+ */
+export const setFacets = function ( searchResults = [] ) {
+    let facets = [];
+    if ( Array.isArray( searchResults ) && searchResults.length > 0 ) {
+        searchResults.forEach( function ( result ) {
+            if ( result.hasOwnProperty( 'work') ) {
+                if ( result.work.hasOwnProperty( 'era') && result.work.era !== '' ) {
+                    facets = updateFacet( facets, 'Era', result.work.era );
+                }
+                if ( result.work.hasOwnProperty( 'type' ) && result.work.type !== '' ) {
+                    facets = updateFacet( facets, 'Type', result.work.type );
+                }
+            }
+            if ( result.hasOwnProperty( 'tags') && Array.isArray( result.tags ) && result.tags.length > 0 ) {
+                result.tags.forEach( function ( tag ) {
+                    facets = updateFacet( facets, 'Tags', tag );
+                });
+            }
+        });
+    }
+    return {
+        type: actions.SET_FACETS,
+        payload: facets
+    };
+};
+
+
+/**
+ * Action to set filters that should be applied to the current search results.
+ *
+ * @since 1.0.0
+ * @param {Array} filters An array of facet objects whose values should be used to filter the current search results.
+ * @return {{type: string, payload: Array}}
+ */
+export const setFilters = function ( filters = [] ) {
+    return {
+        type: actions.SET_FILTERS,
+        payload: filters
     };
 };
 
@@ -215,9 +325,14 @@ export const getMusicData = function ( flatEditor ) {
 };
 
 
+/**
+ * Test function to fetch sample data.
+ *
+ * @return {Function}
+ */
 export const fetchResults = function () {
     return function ( dispatch, getState ) {
-        fetch(  '../sample_data/sample_data.json', {
+        fetch(  '/sample_data/sample_data.json', {
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json'} } )
             .then( function ( response ) {
                 console.log( 'Got a response, returning json...' );
@@ -227,6 +342,8 @@ export const fetchResults = function () {
             .then( function ( json ) {
                 console.log( 'Logging results...' );
                 console.log( json );
+                dispatch( setResults( json ) );
+                dispatch( setFacets( json ) );
             })
             .catch( function ( err ) {
                 console.log( 'Error occurred.' );
