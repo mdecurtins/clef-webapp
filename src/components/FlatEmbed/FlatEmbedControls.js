@@ -5,7 +5,6 @@ import {
     clearAllErrors, clearFilteredResults, fetchResults, getMusicData, previousQuery, searching, setResults,
     view, views
 } from "../../actions/ClefActions";
-import sampleData from  '../../sample_data/sample_data';
 
 class FlatEmbedControls extends React.Component {
 
@@ -24,10 +23,6 @@ class FlatEmbedControls extends React.Component {
     }
 
     submitQuery() {
-        console.log( 'Logging props in FlatEmbedControls.submitQuery():' );
-        console.log( this.props );
-
-
         // Set searching status.
         this.props.setSearchingStatus( true );
 
@@ -45,8 +40,7 @@ class FlatEmbedControls extends React.Component {
     }
 
     testFetchData() {
-        console.log( 'Test fetching data.' );
-        this.props.testData( sampleData );
+        this.props.testData();
     }
 }
 
@@ -99,8 +93,8 @@ function mapDispatchToProps( dispatch ) {
             dispatch( view( viewStatus ) );
         },
 
-        testData: function ( data ) {
-            dispatch( setResults( data ) );
+        testData: function () {
+            dispatch( fetchResults() );
         }
     };
 }
