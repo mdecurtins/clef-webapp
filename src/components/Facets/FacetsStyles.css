@@ -1,0 +1,8 @@
+#clef-facets {
+    min-width: 20%;
+}
+
+#clef-facet-controls {
+    display: flex;
+    margin: 8px 10px;
+}
