@@ -1,0 +1,27 @@
+#clef-errors {
+    margin: 0 auto;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    max-width: 80%;
+}
+
+.clef-error {
+    background-color: rgba(206, 17, 38, 0.1);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
+}
+
+.clef-error p {
+    padding-left: 1em;
+}
+
+.clef-error svg {
+    margin: 1em 0;
+    padding-right: 1em;
+}
+
+.clef-error svg:hover {
+    cursor: pointer;
+}
