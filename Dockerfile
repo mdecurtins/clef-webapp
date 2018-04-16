@@ -15,13 +15,4 @@ ENV PATH /usr/src/app/node_modules/.bin:$PATH
 ADD package.json /usr/src/app/package.json
 RUN npm install
 
-# Install Flat.io embed
-RUN npm install flat-embed
-
-# Install Redux for React
-RUN npm install --save redux
-RUN npm install --save react-redux
-RUN npm install --save-dev redux-devtools
-RUN npm install --save redux-thunk
-
 CMD [ "npm", "start" ]
