@@ -2,8 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import './FlatEmbedStyles.css';
 import {
-    clearAllErrors, clearFilteredResults, fetchResults, getMusicData, previousQuery, searching, setResults,
-    view, views
+    clearAllErrors,
+    clearFilteredResults,
+    fetchResults,
+    fetchTestErrors,
+    getMusicData,
+    previousQuery,
+    searching,
+    setResults,
+    view,
+    views
 } from "../../actions/ClefActions";
 
 class FlatEmbedControls extends React.Component {
@@ -18,6 +26,7 @@ class FlatEmbedControls extends React.Component {
                 <button className="clef-clear-search action-button" onClick={this.clearQuery.bind( this )}>Clear</button>
                 <button className="clef-submit-search action-button" onClick={this.submitQuery.bind( this )}>Search</button>
                 <button className="clef-test-results action-button" onClick={this.testFetchData.bind( this )}>Test Fetch Data</button>
+                <button className="clef-test-errors action-button" onClick={this.testFetchErrors.bind(this)}>Test Fetch Errors</button>
             </div>
         );
     }
@@ -41,6 +50,10 @@ class FlatEmbedControls extends React.Component {
 
     testFetchData() {
         this.props.testData();
+    }
+
+    testFetchErrors() {
+        this.props.testErrors();
     }
 }
 
@@ -95,6 +108,10 @@ function mapDispatchToProps( dispatch ) {
 
         testData: function () {
             dispatch( fetchResults() );
+        },
+
+        testErrors: function () {
+            dispatch( fetchTestErrors() );
         }
     };
 }
