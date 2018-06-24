@@ -353,5 +353,29 @@ export const fetchResults = function () {
 };
 
 
+/**
+ * Test function to fetch sample errors from the Clef REST API
+ *
+ * @return {Function}
+ */
+export const fetchTestErrors = function () {
+    return function ( dispatch, getState ) {
+        fetch( '/test/error', {
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json'} } )
+            .then( function ( response ) {
+            console.log( 'Got a response!' );
+            console.log( response );
+            return response.json();
+        }).then( function ( json ) {
+            console.log( 'Got JSON' );
+            console.log( json );
+        }).catch( function ( err ) {
+            console.log( 'Error while trying to fetch test errors.' );
+            console.log( err );
+        });
+    };
+};
+
+
 
 
