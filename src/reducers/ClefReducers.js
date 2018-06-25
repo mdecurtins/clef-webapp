@@ -2,6 +2,7 @@ import {actions} from "../actions/ClefActions";
 import {combineReducers} from 'redux';
 
 /**
+ * Sets the array of algorithms and their properties that will be available for selection by the user.
  *
  * @since 1.0.0
  * @param {Array} state The current value of the algorithms key in the application state object.
@@ -16,6 +17,7 @@ export const algorithms = function ( state = [], action ) {
 
 
 /**
+ * Sets the array of datasets and their properties that will be available for selection by the user.
  *
  * @since 1.0.0
  * @param {Array} state The current value of the datasets key in the application state object.
