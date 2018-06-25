@@ -2,6 +2,34 @@ import {actions} from "../actions/ClefActions";
 import {combineReducers} from 'redux';
 
 /**
+ *
+ * @since 1.0.0
+ * @param {Array} state The current value of the algorithms key in the application state object.
+ * @param {{type: string, payload: Array}} action The action on which to filter.
+ * @return {*}
+ */
+export const algorithms = function ( state = [], action ) {
+    if ( action.type === actions.SET_ALGORITHMS ) {
+        return action.payload;
+    }
+};
+
+
+/**
+ *
+ * @since 1.0.0
+ * @param {Array} state The current value of the datasets key in the application state object.
+ * @param {{type: string, payload: Array}} action The action on which to filter.
+ * @return {*}
+ */
+export const datasets = function ( state = [], action ) {
+    if ( action.type === actions.SET_DATASETS ) {
+        return action.payload;
+    }
+};
+
+
+/**
  * Adds or removes an error from the array of errors in the application state object.
  *
  * @since 1.0.0
