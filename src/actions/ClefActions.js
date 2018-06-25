@@ -1,6 +1,6 @@
 /**
- * Action creators.
- * @type {{ADD_ERROR: string, CLEAR_ALL_ERRORS: string, CLEAR_ERROR: string, CLEAR_FILTERED_RESULTS: string, CLEAR_FILTERS: string, CLEAR_RESULTS: string, SET_FACETS: string, SET_FILTERED_RESULTS: string, SET_FILTERS: string, SET_FILTER_STATUS: string, SET_FLAT_EMBED: string, SET_PREV_QUERY: string, SET_RESULTS: string, SET_RESULTS_VIEW: string, SET_SEARCHING: string}}
+ *
+ * @type {{ADD_ERROR: string, CLEAR_ALL_ERRORS: string, CLEAR_ERROR: string, CLEAR_FILTERED_RESULTS: string, CLEAR_FILTERS: string, CLEAR_RESULTS: string, SET_ALGORITHMS: string, SET_DATASETS: string, SET_FACETS: string, SET_FILTERED_RESULTS: string, SET_FILTERS: string, SET_FILTER_STATUS: string, SET_FLAT_EMBED: string, SET_PREV_QUERY: string, SET_RESULTS: string, SET_RESULTS_VIEW: string, SET_SEARCHING: string}}
  */
 export const actions = {
     ADD_ERROR: 'ADD_ERROR',
@@ -9,6 +9,8 @@ export const actions = {
     CLEAR_FILTERED_RESULTS: 'CLEAR_FILTERED_RESULTS',
     CLEAR_FILTERS: 'CLEAR_FILTERS',
     CLEAR_RESULTS: 'CLEAR_RESULTS',
+    SET_ALGORITHMS: 'SET_ALGORITHMS',
+    SET_DATASETS: 'SET_DATASETS',
     SET_FACETS: 'SET_FACETS',
     SET_FILTERED_RESULTS: 'SET_FILTERED_RESULTS',
     SET_FILTERS: 'SET_FILTERS',
@@ -195,6 +197,36 @@ const updateFacet = function ( facets, group, value ) {
         }
     }
     return facets;
+};
+
+
+/**
+ * Action to set available algorithms.
+ *
+ * @since 1.0.0
+ * @param {Array} algorithms The array of algorithm properties returned by calling the Clef REST API.
+ * @return {{type: string, payload: Array}}
+ */
+export const setAlgorithms = function ( algorithms = [] ) {
+    return {
+        type: actions.SET_ALGORITHMS,
+        payload: algorithms
+    };
+};
+
+
+/**
+ * Action to set available datasets.
+ *
+ * @since 1.0.0
+ * @param {Array} datasets The array of dataset properties returned by calling the Clef REST API.
+ * @return {{type: string, payload: Array}}
+ */
+export const setDatasets = function ( datasets = [] ) {
+    return {
+        type: actions.SET_DATASETS,
+        payload: datasets
+    };
 };
 
 
