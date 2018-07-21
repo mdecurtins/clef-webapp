@@ -54,7 +54,7 @@ class DatasetsContainer extends React.Component {
         return (
             <div id="clef-datasets">
                 <h3>Datasets</h3>
-
+                {this.displayDatasets()}
             </div>
         );
     }
