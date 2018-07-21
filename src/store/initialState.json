@@ -1,6 +1,9 @@
 {
   "algorithms": [],
+  "algorithmsSelected": [],
+  "checkboxes": [],
   "datasets": [],
+  "datasetsSelected": [],
   "errors": [],
   "facets": [],
   "filtered": false,
