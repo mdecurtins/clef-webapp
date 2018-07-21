@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Header from './components/Header/Header';
+import AlgorithmsContainer from './components/Algorithms/AlgorithmsContainer';
+import DatasetsContainer from './components/Datasets/DatasetsContainer';
 import FlatEmbedContainer from './components/FlatEmbed/FlatEmbedContainer';
 import ErrorsContainer from './components/Errors/ErrorsContainer';
 import FacetsContainer from './components/Facets/FacetsContainer';
@@ -20,8 +22,17 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
           <Header name="Clef Webapp" />
-          <FlatEmbedContainer/>
-          <ErrorsContainer/>
+          <div id="clef-inputs-container">
+              <AlgorithmsContainer/>
+
+              <div className="clef-flat-container">
+                  <FlatEmbedContainer/>
+                  <ErrorsContainer/>
+              </div>
+
+          </div>
+
+
           <div id="clef-results-container">
               <FacetsContainer/>
               <SearchResultContainer/>

@@ -33,3 +33,11 @@
   max-width: 80%;
   text-align: left;
 }
+
+#clef-inputs-container {
+  display: flex;
+}
+
+#clef-inputs-container .clef-flat-container {
+  flex: 1 0 auto;
+}
