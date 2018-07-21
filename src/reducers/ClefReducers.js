@@ -7,11 +7,85 @@ import {combineReducers} from 'redux';
  * @since 1.0.0
  * @param {Array} state The current value of the algorithms key in the application state object.
  * @param {{type: string, payload: Array}} action The action on which to filter.
- * @return {*}
+ * @return {Array}
  */
 export const algorithms = function ( state = [], action ) {
     if ( action.type === actions.SET_ALGORITHMS ) {
         return action.payload;
+    }
+    return state;
+};
+
+
+/**
+ * Sets the array of algorithms selected to be run when the user submits a query.
+ *
+ * @since 1.0.0
+ * @param {Array} state The current value of the algorithmsSelected key in the application state object.
+ * @param {{type: string, payload: object}} action The action on which to filter.
+ * @return {Array}
+ */
+export const algorithmsSelected = function ( state = [], action ) {
+    switch ( action.type ) {
+        case actions.ADD_SELECTED_ALGORITHM:
+            return [
+                ...state,
+                action.payload
+            ];
+        case actions.REMOVE_SELECTED_ALGORITHM:
+            return state.filter(
+                function ( alg ) {
+                    return alg.index !== action.payload.index;
+                }
+            );
+
+        default:
+            return state;
+    }
+};
+
+
+/**
+ * Sets the array of checkboxes that allow selection of algorithms and datatests in the webapp controls.
+ *
+ * @since 1.0.0
+ * @param {Array} state The current value of the checkboxes key in the application state object.
+ * @param {{type: string, payload: object}} action The action on which to filter.
+ * @return {Array}
+ */
+export const checkboxes = function ( state = [], action ) {
+    switch ( action.type ) {
+        case actions.ADD_CHECKBOX:
+            let found = false;
+            state.forEach( function ( c ) {
+                if ( ! found && c.which === action.payload.which && c.index === action.payload.index ) {
+                    found = true;
+                }
+            });
+            if ( ! found ) {
+                return [
+                    ...state,
+                    action.payload
+                ];
+            }
+            return state;
+        case actions.REMOVE_CHECKBOX:
+            return state.filter(
+                function ( c ) {
+                    return ( c.which === action.payload.which && c.index === action.payload.index );
+                }
+            );
+        case actions.CHANGE_CHECKBOX_STATE:
+            return state.map(
+                function ( c ) {
+                    if ( c.which === action.payload.which && c.index === action.payload.index ) {
+                        c.checked = ! c.checked;
+                    }
+                    return c;
+                }
+            );
+        default:
+            return state;
     }
 };
 
@@ -22,11 +96,39 @@ export const algorithms = function ( state = [], action ) {
  * @since 1.0.0
  * @param {Array} state The current value of the datasets key in the application state object.
  * @param {{type: string, payload: Array}} action The action on which to filter.
- * @return {*}
+ * @return {Array}
  */
 export const datasets = function ( state = [], action ) {
     if ( action.type === actions.SET_DATASETS ) {
         return action.payload;
+    }
+    return state;
+};
+
+
+/**
+ * Adds or removes a dataset name from the array of dataset names selected to add to a Clef API call.
+ *
+ * @since 1.0.0
+ * @param {Array} state The current value of the datasetsSelected key in the application state object.
+ * @param {{type: string, payload: string}} action The action on which to filter.
+ * @return {Array}
+ */
+export const datasetsSelected = function ( state = [], action ) {
+    switch ( action.type ) {
+        case actions.ADD_SELECTED_DATASET:
+            return [
+                ...state,
+                action.payload
+            ];
+        case actions.REMOVE_SELECTED_DATASET:
+            return state.filter(
+                function ( dset ) {
+                    return dset !== action.payload;
+                }
+            );
+        default:
+            return state;
     }
 };
 
@@ -203,6 +305,11 @@ export const view = function ( state = 0, action ) {
 
 
 export default combineReducers({
+    algorithms,
+    algorithmsSelected,
+    checkboxes,
+    datasets,
+    datasetsSelected,
     errors,
     facets,
     filtered,
