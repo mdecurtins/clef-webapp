@@ -1,14 +1,21 @@
 /**
  *
- * @type {{ADD_ERROR: string, CLEAR_ALL_ERRORS: string, CLEAR_ERROR: string, CLEAR_FILTERED_RESULTS: string, CLEAR_FILTERS: string, CLEAR_RESULTS: string, SET_ALGORITHMS: string, SET_DATASETS: string, SET_FACETS: string, SET_FILTERED_RESULTS: string, SET_FILTERS: string, SET_FILTER_STATUS: string, SET_FLAT_EMBED: string, SET_PREV_QUERY: string, SET_RESULTS: string, SET_RESULTS_VIEW: string, SET_SEARCHING: string}}
+ * @type {{ADD_CHECKBOX: string, ADD_ERROR: string, ADD_SELECTED_ALGORITHM: string, ADD_SELECTED_DATASET: string, CHANGE_CHECKBOX_STATE: string, CLEAR_ALL_ERRORS: string, CLEAR_ERROR: string, CLEAR_FILTERED_RESULTS: string, CLEAR_FILTERS: string, CLEAR_RESULTS: string, REMOVE_CHECKBOX: string, REMOVE_SELECTED_ALGORITHM: string, REMOVE_SELECTED_DATASET: string, SET_ALGORITHMS: string, SET_DATASETS: string, SET_FACETS: string, SET_FILTERED_RESULTS: string, SET_FILTERS: string, SET_FILTER_STATUS: string, SET_FLAT_EMBED: string, SET_PREV_QUERY: string, SET_RESULTS: string, SET_RESULTS_VIEW: string, SET_SEARCHING: string}}
  */
 export const actions = {
+    ADD_CHECKBOX: 'ADD_CHECKBOX',
     ADD_ERROR: 'ADD_ERROR',
+    ADD_SELECTED_ALGORITHM: 'ADD_SELECTED_ALGORITHM',
+    ADD_SELECTED_DATASET: 'ADD_SELECTED_DATASET',
+    CHANGE_CHECKBOX_STATE: 'CHANGE_CHECKBOX_STATE',
     CLEAR_ALL_ERRORS: 'CLEAR_ALL_ERRORS',
     CLEAR_ERROR: 'CLEAR_ERROR',
     CLEAR_FILTERED_RESULTS: 'CLEAR_FILTERED_RESULTS',
     CLEAR_FILTERS: 'CLEAR_FILTERS',
     CLEAR_RESULTS: 'CLEAR_RESULTS',
+    REMOVE_CHECKBOX: 'REMOVE_CHECKBOX',
+    REMOVE_SELECTED_ALGORITHM: 'REMOVE_SELECTED_ALGORITHM',
+    REMOVE_SELECTED_DATASET: 'REMOVE_SELECTED_DATASET',
     SET_ALGORITHMS: 'SET_ALGORITHMS',
     SET_DATASETS: 'SET_DATASETS',
     SET_FACETS: 'SET_FACETS',
@@ -36,6 +43,21 @@ export const views = {
 
 
 /**
+ * Action to add an algorithm/dataset selection checkbox to the checkboxes in the application state object.
+ *
+ * @since 1.0.0
+ * @param {object} checkbox the checkbox to add. Expected format: {which: string, index: number, checked: bool}
+ * @return {{type: string, payload: object}}
+ */
+export const addCheckbox = function ( checkbox ) {
+    return {
+        type: actions.ADD_CHECKBOX,
+        payload: checkbox
+    };
+};
+
+
+/**
  * Action to add an error.
  *
  * @since 1.0.0
@@ -46,6 +68,53 @@ export const addError = function ( msg ) {
     return {
         type: actions.ADD_ERROR,
         payload: msg
+    };
+};
+
+
+/**
+ * Action to add a selected algorithm.
+ *
+ * @since 1.0.0
+ * @param {object} alg the Algorithm to add. Expected format: {algorithm: string, index: number, parameters: Array}
+ * @return {{type: string, payload: object}}
+ */
+export const addSelectedAlgorithm = function ( alg ) {
+    return {
+        type: actions.ADD_SELECTED_ALGORITHM,
+        payload: alg
+    };
+};
+
+
+/**
+ * Action to add a selected dataset.
+ *
+ * @since 1.0.0
+ * @param {string} dset the name of the dataset to add
+ * @return {{type: string, payload: string}}
+ */
+export const addSelectedDataset = function ( dset ) {
+    return {
+        type: actions.ADD_SELECTED_DATASET,
+        payload: dset
+    };
+};
+
+
+/**
+ * Action to change the checked state of an algorithm/dataset selection checkbox in the application state object.
+ *
+ * checkbox should be an object {which: algorithm|dataset, index: number, checked: bool}
+ *
+ * @since 1.0.0
+ * @param {object} checkbox the checkbox to change. Expected format: {which: string, index: number, checked: bool}
+ * @return {{type: string, payload: object}}
+ */
+export const changeCheckboxState = function ( checkbox ) {
+    return {
+        type: actions.CHANGE_CHECKBOX_STATE,
+        payload: checkbox
     };
 };
 
@@ -138,6 +207,51 @@ export const previousQuery = function ( query ) {
 
 
 /**
+ * Action to remove an algorithm/dataset selection checkbox from checkboxes in the application state object.
+ *
+ * @since 1.0.0
+ * @param {object} checkbox the checkbox to remove. Expected format: {which: string, index: number, checked: bool}
+ * @return {{type: string, payload: object}}
+ */
+export const removeCheckbox = function ( checkbox ) {
+    return {
+        type: actions.REMOVE_CHECKBOX,
+        payload: checkbox
+    }
+};
+
+
+/**
+ * Action to remove an Algorithm from the selected algorithms in the application state object.
+ *
+ * @since 1.0.0
+ * @param {object} alg the Algorithm to remove. Expected format: {algorithm: string, index: number, parameters: Array}
+ * @return {{type: string, payload: *}}
+ */
+export const removeSelectedAlgorithm = function ( alg ) {
+    return {
+        type: actions.REMOVE_SELECTED_ALGORITHM,
+        payload: alg
+    };
+};
+
+
+/**
+ * Action to remove a dataset name from the selected datasets in the application state object.
+ *
+ * @since 1.0.0
+ * @param {string} dset
+ * @return {{type: string, payload: string}}
+ */
+export const removeSelectedDataset = function ( dset ) {
+    return {
+        type: actions.REMOVE_SELECTED_ALGORITHM,
+        payload: dset
+    };
+};
+
+
+/**
  * Action to set whether or not a search is currently being executed.
  *
  * @since 1.0.0
@@ -149,54 +263,6 @@ export const searching = function ( searching = false ) {
         type: actions.SET_SEARCHING,
         payload: searching
     };
-};
-
-
-/**
- * Creates a new Facet object.
- *
- * @since 1.0.0
- * @param {string} group The header under which this facet should be grouped.
- * @param {string} label The label text that should be displayed next to the facet checkbox in the faceted search form.
- * @param {string} value The value that should be used to filter the search results.
- * @return {{facet_group: string, facet_num_matches: number, facet_label: string, facet_value: string}}
- */
-const newFacet = function ( group = "", label = "", value = "" ) {
-    return {
-        "facet_group": group,
-        "facet_num_matches": 1,
-        "facet_label": label,
-        "facet_value": value
-    };
-};
-
-
-/**
- * Updates a Facet object's number of matches if the facet exists; adds the facet if it does not.
- *
- * @since 1.0.0
- * @param {Array} facets The array of facets to be stored in application state.
- * @param {string} group The header under which this facet should be grouped.
- * @param {string} value The value that should be used to filter the search results, also used here to match an existing
- *  facet.
- * @return {Array} The mutated array of facets to be stored in application state.
- */
-const updateFacet = function ( facets, group, value ) {
-    if ( facets.length === 0 ) {
-        facets.push( newFacet( group, value, value ) );
-    } else {
-        let found = false;
-        for ( let i = 0; i < facets.length; i++ ) {
-            if ( facets[i].facet_value === value ) {
-                found = true;
-                facets[i].facet_num_matches++;
-            }
-        }
-        if ( ! found ) {
-            facets.push( newFacet( group, value, value ) );
-        }
-    }
-    return facets;
 };
 
 
@@ -328,10 +394,115 @@ export const view = function ( value ) {
 };
 
 
-/*** Thunks ***/
+///// NON-PUBLIC FUNCTIONS /////
+
 
 /**
+ * Creates a new Facet object.
  *
+ * @since 1.0.0
+ * @param {string} group The header under which this facet should be grouped.
+ * @param {string} label The label text that should be displayed next to the facet checkbox in the faceted search form.
+ * @param {string} value The value that should be used to filter the search results.
+ * @return {{facet_group: string, facet_num_matches: number, facet_label: string, facet_value: string}}
+ */
+const newFacet = function ( group = "", label = "", value = "" ) {
+    return {
+        "facet_group": group,
+        "facet_num_matches": 1,
+        "facet_label": label,
+        "facet_value": value
+    };
+};
+
+
+/**
+ * Updates a Facet object's number of matches if the facet exists; adds the facet if it does not.
+ *
+ * @since 1.0.0
+ * @param {Array} facets The array of facets to be stored in application state.
+ * @param {string} group The header under which this facet should be grouped.
+ * @param {string} value The value that should be used to filter the search results, also used here to match an existing
+ *  facet.
+ * @return {Array} The mutated array of facets to be stored in application state.
+ */
+const updateFacet = function ( facets, group, value ) {
+    if ( facets.length === 0 ) {
+        facets.push( newFacet( group, value, value ) );
+    } else {
+        let found = false;
+        for ( let i = 0; i < facets.length; i++ ) {
+            if ( facets[i].facet_value === value ) {
+                found = true;
+                facets[i].facet_num_matches++;
+            }
+        }
+        if ( ! found ) {
+            facets.push( newFacet( group, value, value ) );
+        }
+    }
+    return facets;
+};
+
+
+///// THUNKS /////
+
+/**
+ * Function to get the currently available algorithms obtained by calling the /algorithms endpoint of the Clef API.
+ *
+ * @since 1.0.0
+ * @return {Function}
+ */
+export const getAlgorithms = function () {
+    return function ( dispatch ) {
+        fetch( '/algorithms', { 
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
+        }).then( function ( response ) {
+            return response.json();
+        }).then( function ( json ) {
+            let algorithms = [];
+            if ( json.hasOwnProperty( 'algorithms' ) ) {
+                algorithms = json.algorithms;
+            }
+            dispatch( setAlgorithms( algorithms ) );
+        }).catch( function ( err ) {
+            dispatch( addError( err.message ) );
+        });
+    };
+};
+
+
+/**
+ * Function to get the currently available datasets obtained by calling the /datasets endpoint of the Clef API.
+ *
+ * @since 1.0.0
+ * @return {Function}
+ */
+export const getDatasets = function () {
+    return function ( dispatch ) {
+        fetch( '/datasets', {
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
+        }).then( function ( response ) {
+            return response.json();
+        }).then( function ( json ) {
+            if ( json.hasOwnProperty( 'datasets' ) && Array.isArray( json.datasets ) ) {
+                dispatch( setDatasets( json.datasets ) );
+            }
+            console.log( json );
+        }).catch( function ( err ) {
+            dispatch( addError( err.message ) );
+        });
+    };
+};
+
+
+/**
+ * Function to get the current contents of the Flat.io editor, as MusicXML.
+ *
+ * This thunk stores the MusicXML string in the previousQuery key of the application state object, so that it is
+ * accessible from outside the scope of the Promise returned by the getMusicXML() function.
+ *
+ * @since 1.0.0
  * @param {Embed} flatEditor
  * @returns {Function}
  */
@@ -357,9 +528,14 @@ export const getMusicData = function ( flatEditor ) {
 };
 
 
+
+///// TEST THUNKS /////
+
+
 /**
  * Test function to fetch sample data.
  *
+ * @since 1.0.0
  * @return {Function}
  */
 export const fetchResults = function () {
@@ -388,6 +564,7 @@ export const fetchResults = function () {
 /**
  * Test function to fetch sample errors from the Clef REST API
  *
+ * @since 1.0.0
  * @return {Function}
  */
 export const fetchTestErrors = function () {
@@ -399,8 +576,11 @@ export const fetchTestErrors = function () {
             console.log( response );
             return response.json();
         }).then( function ( json ) {
-            console.log( 'Got JSON' );
-            console.log( json );
+            if ( json.hasOwnProperty( 'errors' ) && Array.isArray( json.errors ) ) {
+                json.errors.forEach( function ( err ) {
+                    dispatch( addError( err.message ) );
+                });
+            }
         }).catch( function ( err ) {
             console.log( 'Error while trying to fetch test errors.' );
             console.log( err );
