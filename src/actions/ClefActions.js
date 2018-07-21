@@ -245,7 +245,7 @@ export const removeSelectedAlgorithm = function ( alg ) {
  */
 export const removeSelectedDataset = function ( dset ) {
     return {
-        type: actions.REMOVE_SELECTED_ALGORITHM,
+        type: actions.REMOVE_SELECTED_DATASET,
         payload: dset
     };
 };
@@ -488,7 +488,6 @@ export const getDatasets = function () {
             if ( json.hasOwnProperty( 'datasets' ) && Array.isArray( json.datasets ) ) {
                 dispatch( setDatasets( json.datasets ) );
             }
-            console.log( json );
         }).catch( function ( err ) {
             dispatch( addError( err.message ) );
         });
