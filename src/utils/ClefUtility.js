@@ -6,7 +6,7 @@
  */
 export default class ClefUtility {
 
-    
+
     /**
      * Constructs a complete parameter string to append to a Clef REST API route.
      *
