@@ -2,6 +2,8 @@
  *
  * @type {{ADD_CHECKBOX: string, ADD_ERROR: string, ADD_SELECTED_ALGORITHM: string, ADD_SELECTED_DATASET: string, CHANGE_CHECKBOX_STATE: string, CLEAR_ALL_ERRORS: string, CLEAR_ERROR: string, CLEAR_FILTERED_RESULTS: string, CLEAR_FILTERS: string, CLEAR_RESULTS: string, REMOVE_CHECKBOX: string, REMOVE_SELECTED_ALGORITHM: string, REMOVE_SELECTED_DATASET: string, SET_ALGORITHMS: string, SET_DATASETS: string, SET_FACETS: string, SET_FILTERED_RESULTS: string, SET_FILTERS: string, SET_FILTER_STATUS: string, SET_FLAT_EMBED: string, SET_PREV_QUERY: string, SET_RESULTS: string, SET_RESULTS_VIEW: string, SET_SEARCHING: string}}
  */
+import ClefUtility from "../utils/ClefUtility";
+
 export const actions = {
     ADD_CHECKBOX: 'ADD_CHECKBOX',
     ADD_ERROR: 'ADD_ERROR',
@@ -516,16 +518,58 @@ export const getMusicData = function ( flatEditor ) {
                     console.log( 'Got MusicXML: ' );
                     console.log( xml );
                     dispatch( previousQuery( xml ) );
+
                 })
                 .catch( function ( err ) {
                     /** @var {Error} err */
                     console.log( 'An error occurred.' );
                     dispatch( addError( err.message ) );
+
                 });
         }
     };
 };
 
+
+export const execRequest = function ( flatEditor, selectedAlgorithms, selectedDatasets ) {
+    return function ( dispatch ) {
+        if ( flatEditor === null || typeof flatEditor === 'undefined' ) {
+            dispatch( addError( 'Flat Embed instance is either null or undefined.' ) );
+        } else {
+            flatEditor.getMusicXML()
+                .then( function ( xml ) {
+                    dispatch( previousQuery( xml ) );
+                    let url = '/search';
+                    url += ClefUtility.constructRequestUrlParameterString( selectedAlgorithms, selectedDatasets );
+
+                    let options = {
+                        method: 'POST',
+                        headers: {
+                            "Content-Type": 'application/xml'
+                        },
+                        body: xml
+                    };
+
+                    // Send the request to the Clef REST API
+                    fetch( url, options )
+                        .then( function ( response ) {
+                            return response.json();
+                        })
+                        .then( function ( json ) {
+                            console.log( json );
+                        }).catch( function ( err ) {
+                        /** @var err */
+                        console.log( err );
+                        dispatch( addError( err.message ) );
+                    });
+                })
+                .catch( function ( err ) {
+                    /** @var {Error} err */
+                    dispatch( addError( err.message ) );
+                });
+        }
+    };
+};
 
 
 ///// TEST THUNKS /////
