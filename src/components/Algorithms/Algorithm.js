@@ -112,14 +112,33 @@ class Algorithm extends React.Component {
      * capabilities (whether it can be run on monophonic/polyphonic datasets).
      *
      * @since 1.0.0
-     * @param {object} caps
-     * @return {Array}
+     * @return {*}
      */
-    displayCapabilities( caps ) {
-        let retval = [];
-        retval.push( <p>Monophonic: {( caps.monophonicData ) ? "true" : "false"}</p> );
-        retval.push( <p>Polyphonic: {( caps.polyphonicData ) ? "true" : "false"}</p> );
-        return retval;
+    displayCapabilities() {
+        let dataCaps = this.props.alg.datasetCapabilities;
+        let inputCaps = this.props.alg.inputCapabilities;
+        return (
+            <div className="capabilities">
+                <table>
+                    <thead>
+                        <tr><th>Capabilities:</th><th>Dataset</th><th>Input</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Monophonic</td>
+                            <td>{(dataCaps.monophonicData) ? "true" : "false"}</td>
+                            <td>{(inputCaps.monophonicData) ? "true" : "false"}</td>
+                        </tr>
+                        <tr>
+                            <td>Polyphonic</td>
+                            <td>{(dataCaps.polyphonicData) ? "true" : "false"}</td>
+                            <td>{(inputCaps.polyphonicData) ? "true" : "false"}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        );
+
     }
 
 
@@ -283,14 +302,7 @@ class Algorithm extends React.Component {
                     <label htmlFor={"select-" + this.props.alg.name}>{this.props.alg.displayName}</label>
                 </div>
 
-                <div>
-                    <p>Dataset Capabilities:</p>
-                    {this.displayCapabilities( this.props.alg.datasetCapabilities )}
-                </div>
-                <div>
-                    <p>Input Capabiltiies:</p>
-                    {this.displayCapabilities( this.props.alg.inputCapabilities )}
-                </div>
+                {this.displayCapabilities()}
                 {this.displayQuerySizeRange()}
             </div>
         );

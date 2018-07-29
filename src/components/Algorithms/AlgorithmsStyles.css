@@ -1,3 +1,8 @@
 #clef-algorithms {
     width: 350px;
 }
+
+.clef-algorithm .capabilities tr th:not(:last-child),
+.clef-algorithm .capabilities tr td:not(:last-child) {
+    padding-right: 10px;
+}
