@@ -7,7 +7,7 @@ import ErrorsContainer from './components/Errors/ErrorsContainer';
 import FacetsContainer from './components/Facets/FacetsContainer';
 import SearchResultContainer from './components/SearchResult/SearchResultContainer';
 import logo from './images/clef_logo.svg';
-import FaGithub from 'react-icons/lib/fa/github';
+import MainMenu from './components/Menus/MainMenu';
 import './App.css';
 
 
@@ -22,13 +22,7 @@ class App extends Component {
                 <div className="App-title-wrapper">
                     <h1 className="App-title">Clef Web Application</h1>
                 </div>
-                <div className="App-main-menu">
-                    <nav>
-                        <a href="#">Home</a>
-                        <a href="#">Documentation</a>
-                        <a href="#"><FaGithub/> GitHub</a>
-                    </nav>
-                </div>
+                <MainMenu/>
             </div>
 
         </header>
