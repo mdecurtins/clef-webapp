@@ -168,7 +168,7 @@ class Algorithm extends React.Component {
         let caps = this.props.alg.inputCapabilities;
         return (
             <div className="query-size-range">
-                <p><span className="min">Min: {caps.querySizeMin}</span>, <span className="max">Max: {caps.querySizeMax}</span></p>
+                <p>Allowed query size, in notes (min, max): ({caps.querySizeMin}, {caps.querySizeMax})</p>
             </div>
         );
     }
