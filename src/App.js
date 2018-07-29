@@ -26,17 +26,21 @@ class App extends Component {
             </div>
 
         </header>
-          <Header name="Clef Webapp" />
+
           <div id="clef-inputs-container">
-              <div className="clef-algorithms-datasets-container">
-                  <AlgorithmsContainer/>
-                  <DatasetsContainer/>
+              <Header name="Clef Webapp" />
+              <div id="clef-wrapper">
+                  <div className="clef-algorithms-datasets-container">
+                      <AlgorithmsContainer/>
+                      <DatasetsContainer/>
+                  </div>
+
+                  <div className="clef-flat-container">
+                      <FlatEmbedContainer/>
+                      <ErrorsContainer/>
+                  </div>
               </div>
 
-              <div className="clef-flat-container">
-                  <FlatEmbedContainer/>
-                  <ErrorsContainer/>
-              </div>
 
           </div>
 

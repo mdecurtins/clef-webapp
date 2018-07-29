@@ -50,9 +50,12 @@
 }
 
 #clef-inputs-container {
-  display: flex;
   margin: 0 auto;
   max-width: 80%;
+}
+
+#clef-wrapper {
+  display: flex;
 }
 
 #clef-inputs-container .clef-flat-container {
