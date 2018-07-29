@@ -557,6 +557,9 @@ export const execRequest = function ( flatEditor, selectedAlgorithms, selectedDa
                         })
                         .then( function ( json ) {
                             console.log( json );
+                            if ( json.hasOwnProperty( 'results' ) && Array.isArray( json.results ) ) {
+                                dispatch( setResults( json.results ) );
+                            }
                         }).catch( function ( err ) {
                         /** @var err */
                         console.log( err );
