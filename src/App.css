@@ -9,24 +9,56 @@
 
 .App-header {
   background-color: #222;
-  height: 150px;
+  height: 80px;
   padding: 20px;
   color: white;
 }
 
+.App-header-inner {
+  display: flex;
+  margin: 0 auto;
+  max-width: 80%;
+}
+
+.App-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .App-title {
-  font-size: 1.5em;
+  font-size: 2em;
+  padding: 0 20px;
+}
+
+.App-main-menu {
+  display: flex;
+  align-items: center;
+  flex: 1 0 auto;
+  justify-content: flex-end;
+  text-transform: uppercase;
+}
+
+.App-main-menu nav {
+
+}
+
+.App-main-menu a {
+  color: white;
+  font-size: 1.2em;
+  padding-left: 20px;
+  text-decoration: none;
 }
 
 .App-intro {
   font-size: large;
 }
-
+/*
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-
+*/
 #clef-results-container {
   display: flex;
   margin: auto;
