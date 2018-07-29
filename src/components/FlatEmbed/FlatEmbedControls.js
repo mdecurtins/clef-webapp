@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './FlatEmbedStyles.css';
+import ClefUtility from '../../utils/ClefUtility';
 import {
     clearAllErrors,
     clearFilteredResults,
@@ -46,6 +47,7 @@ class FlatEmbedControls extends React.Component {
 
         // Get the current data in the Flat Embed as MusicXML and store it as the previous query.
         this.props.getMusic( this.props.flatEditor );
+        
     }
 
     testFetchData() {
@@ -67,7 +69,10 @@ class FlatEmbedControls extends React.Component {
  */
 function mapStateToProps( state ) {
     return {
-        flatEditor: state.flatEmbed
+        selectedAlgorithms: state.algorithmsSelected,
+        selectedDatasets: state.datasetsSelected,
+        flatEditor: state.flatEmbed,
+        query: state.previousQuery
     };
 }
 
