@@ -51,8 +51,17 @@
 
 #clef-inputs-container {
   display: flex;
+  margin: 0 auto;
+  max-width: 80%;
 }
 
 #clef-inputs-container .clef-flat-container {
   flex: 1 0 auto;
+}
+
+.clef-algorithms-datasets-container {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding-left: 20px;
 }
