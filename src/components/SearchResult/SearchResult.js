@@ -33,8 +33,13 @@ export default class SearchResult extends React.Component {
     render() {
         return (
             <div className="clef-result">
-                { this.displayComposer() }
-                { this.displayWork() }
+                <div className="clef-result-rank">
+                    <p>{this.props.idx}.</p>
+                </div>
+                <div className="clef-result-content">
+                    { this.displayWork() }
+                    { this.displayComposer() }
+                </div>
             </div>
         );
     }
