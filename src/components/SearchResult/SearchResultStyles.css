@@ -1,0 +1,19 @@
+.clef-result {
+    color: #444444;
+    display: flex;
+    align-items: baseline;
+    font-size: 1.2em;
+}
+
+.clef-result-rank {
+    padding-right: 15px;
+
+}
+
+.clef-result-rank p {
+    font-weight: bold;
+}
+
+.clef-result-content {
+
+}
