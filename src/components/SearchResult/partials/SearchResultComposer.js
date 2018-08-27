@@ -34,7 +34,7 @@ export default class SearchResultComposer extends React.Component {
     renderDates() {
         let dates;
         if ( this.hasDates() ) {
-            dates = <p className="clef-result-composer-dates">{this.renderDatesBorn()}&ndash;{this.renderDatesDied()}</p>;
+            dates = <span className="clef-result-composer-dates">{this.renderDatesBorn()}&ndash;{this.renderDatesDied()}</span>;
         }
         return dates;
     }
@@ -79,7 +79,7 @@ export default class SearchResultComposer extends React.Component {
     renderName() {
         let name;
         if ( this.hasName() ) {
-            name = <p className="clef-result-composer-name">{this.props.composer.name}</p>;
+            name = <span className="clef-result-composer-name">{this.props.composer.name}</span>;
         }
         return name;
     }
@@ -89,8 +89,7 @@ export default class SearchResultComposer extends React.Component {
     render() {
         return (
             <div className="clef-result-composer">
-                {this.renderName()}
-                {this.renderDates()}
+                <p>{this.renderName()} ({this.renderDates()})</p>
             </div>
         );
     }
