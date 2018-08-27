@@ -53,8 +53,8 @@ export default class SearchResultWork extends React.Component {
      */
     renderCatalogNumber() {
         let catalogNum = '';
-        if ( this.has( 'catalog_number' ) ) {
-            catalogNum = <span className="work-catalog-number">{this.props.work.catalog_number}</span>;
+        if ( this.has( 'catalogNumber' ) ) {
+            catalogNum = <span className="work-catalog-number">{this.props.work.catalogNumber}</span>;
         }
         return catalogNum;
     }
