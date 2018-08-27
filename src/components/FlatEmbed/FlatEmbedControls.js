@@ -4,7 +4,7 @@ import './FlatEmbedStyles.css';
 import ClefUtility from '../../utils/ClefUtility';
 import {
     clearAllErrors,
-    clearFilteredResults,
+    clearFilteredResults, execRequest,
     fetchResults,
     fetchTestErrors,
     getMusicData,
@@ -26,8 +26,6 @@ class FlatEmbedControls extends React.Component {
             <div id="clef-search-controls">
                 <button className="clef-clear-search action-button" onClick={this.clearQuery.bind( this )}>Clear</button>
                 <button className="clef-submit-search action-button" onClick={this.submitQuery.bind( this )}>Search</button>
-                <button className="clef-test-results action-button" onClick={this.testFetchData.bind( this )}>Test Fetch Data</button>
-                <button className="clef-test-errors action-button" onClick={this.testFetchErrors.bind(this)}>Test Fetch Errors</button>
             </div>
         );
     }
@@ -46,8 +44,8 @@ class FlatEmbedControls extends React.Component {
         this.props.clearFilteredResults();
 
         // Get the current data in the Flat Embed as MusicXML and store it as the previous query.
-        this.props.getMusic( this.props.flatEditor );
-        
+        //this.props.getMusic( this.props.flatEditor );
+        this.props.doSearch( this.props.flatEditor, this.props.selectedAlgorithms, this.props.selectedDatasets );
     }
 
     testFetchData() {
@@ -93,6 +91,10 @@ function mapDispatchToProps( dispatch ) {
 
         clearFilteredResults: function () {
             dispatch( clearFilteredResults() );
+        },
+
+        doSearch: function( flatEditor, selectedAlgorithms, selectedDatasets ) {
+            dispatch( execRequest( flatEditor, selectedAlgorithms, selectedDatasets ) );
         },
 
         getMusic: function ( flatEditor ) {
