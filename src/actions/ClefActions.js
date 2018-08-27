@@ -533,12 +533,17 @@ export const getMusicData = function ( flatEditor ) {
 
 export const execRequest = function ( flatEditor, selectedAlgorithms, selectedDatasets ) {
     return function ( dispatch ) {
-        if ( flatEditor === null || typeof flatEditor === 'undefined' ) {
+        if ( selectedAlgorithms.length === 0 || selectedDatasets.length === 0 ) {
+            dispatch( addError( 'You must select at least one algorithm and at least one dataset.' ) );
+        } else if ( flatEditor === null || typeof flatEditor === 'undefined' ) {
             dispatch( addError( 'Flat Embed instance is either null or undefined.' ) );
         } else {
             flatEditor.getMusicXML()
                 .then( function ( xml ) {
+                    // Set the value of the previousQuery key to the current query
                     dispatch( previousQuery( xml ) );
+
+                    // Construct the request URL
                     let url = '/search';
                     url += ClefUtility.constructRequestUrlParameterString( selectedAlgorithms, selectedDatasets );
 
