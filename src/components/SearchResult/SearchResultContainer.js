@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchResult from './SearchResult';
 import { connect } from 'react-redux';
+import './SearchResultStyles.css';
 
 class SearchResultContainer extends React.Component {
 
@@ -10,7 +11,7 @@ class SearchResultContainer extends React.Component {
         console.log( results );
         return results.map( function ( result ) {
            return (
-               <SearchResult key={result.ranking} resultData={result} />
+               <SearchResult key={result.ranking} resultData={result} idx={result.ranking} />
            );
         });
     }
