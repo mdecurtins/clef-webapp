@@ -3,18 +3,13 @@ import React from 'react';
 export default class SearchResultWork extends React.Component {
 
 
-    hasCompositionDate() {
-        return this.props.work.hasOwnProperty( 'composition_date' ) && this.props.work.composition_date !== '';
-    }
-
-    hasEra() {
-        return this.props.work.hasOwnProperty( 'era' ) && this.props.work.era !== '';
-    }
-
-    hasType() {
-        return this.props.work.hasOwnProperty( 'type' ) && this.props.work.type !== '';
-    }
-
+    /**
+     * Checks if the musical work data has a property for the given key.
+     *
+     * @since 1.0.0
+     * @param key
+     * @return {boolean}
+     */
     has( key ) {
         return this.props.work.hasOwnProperty( key ) && this.props.work[ key ] !== '';
     }

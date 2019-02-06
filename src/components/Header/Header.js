@@ -1,6 +1,11 @@
 import React from 'react';
 import './Header.css';
 
+/**
+ * Class for the app/page header.
+ *
+ * @since 1.0.0
+ */
 export default class Header extends React.Component {
     render() {
         return (
