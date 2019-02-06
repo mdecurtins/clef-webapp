@@ -11,6 +11,8 @@ The current version of the web application uses the browser-based music notation
 
 The web application is intended to be used with the Clef Core API, which provides information about available MIR algorithms and datasets, and which also provides the query route for submitting MIR queries. 
 
+This project was bootstrapped using [create-react-app](https://github.com/facebook/create-react-app).
+
 #### Source Guide
 `src/actions` contains Redux action creators.
 
