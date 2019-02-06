@@ -17,7 +17,9 @@ export default class ClefUtility {
      */
     static constructRequestUrlParameterString( selectedAlgorithms = [], selectedDatasets = [] ) {
         let retval = "";
-        if ( ! Array.isArray( selectedAlgorithms ) || 
+
+        // Check the parameters received.
+        if ( ! Array.isArray( selectedAlgorithms ) ||
             ( Array.isArray( selectedAlgorithms ) && selectedAlgorithms.length === 0 ) ) {
             retval = "INVALID_ALGORITHMS";
         }
@@ -180,7 +182,7 @@ export default class ClefUtility {
      *
      * @since 1.0.0
      * @param {string} key
-     * @param {*} val
+     * @param {*} val Non-string values will be coerced via toString()
      * @return {string}
      */
     static getParameterPair( key, val ) {
