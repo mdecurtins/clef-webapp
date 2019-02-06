@@ -72,6 +72,7 @@ class Dataset extends React.Component {
      * @return {*}
      */
     displayDatasetSelect() {
+        // Get the attributes of this Dataset.
         let attrs = this.props.dset.datasetAttributes;
 
         let checkbox = this.getCheckbox();
@@ -85,7 +86,7 @@ class Dataset extends React.Component {
             checked = checkbox.checked;
         }
 
-
+        // HTML for a single checkbox.
         return (
             <div className="clef-dataset-select">
                 <input type="checkbox"

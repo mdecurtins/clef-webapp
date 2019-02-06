@@ -26,6 +26,7 @@ class AlgorithmsContainer extends React.Component {
      * @since 1.0.0
      */
     componentDidMount() {
+        // Get the available algorithms by calling out to the Clef API.
         this.props.fetchAlgorithms();
     }
 

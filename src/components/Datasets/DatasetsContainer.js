@@ -23,6 +23,7 @@ class DatasetsContainer extends React.Component {
      * @since 1.0.0
      */
     componentDidMount() {
+        // Get available datasets by calling out to the Clef API.
         this.props.fetchDatasets();
     }
 

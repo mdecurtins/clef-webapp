@@ -13,11 +13,10 @@ class Algorithm extends React.Component {
     constructor( props ) {
         super( props );
 
-        // Bind the instance methods.
+        // Bind the instance methods. In next version, use Autobind.
         this.deselectAlgorithm.bind( this );
         this.displayAlgorithmSelect.bind( this );
         this.displayAlgorithmType.bind( this );
-        this.displayAllowedDataFormats.bind( this );
         this.displayCapabilities.bind( this );
         this.displayParameters.bind( this );
         this.displayQuerySizeRange.bind( this );
@@ -92,17 +91,6 @@ class Algorithm extends React.Component {
         return ( <p>Algorithm Type: {this.props.alg.type}</p> );
     }
 
-
-    /**
-     *
-     */
-    displayAllowedDataFormats() {
-        let allowed = this.props.alg.datasetCapabilities.allowedFileTypes;
-
-        if ( Array.isArray( allowed ) && allowed.length > 0 ) {
-
-        }
-    }
 
 
     /**
@@ -200,35 +188,6 @@ class Algorithm extends React.Component {
 
 
     /**
-     * Gets an HTML input element for a parameter of this Algorithm.
-     *
-     *
-     * @since 1.0.0
-     * @param param
-     * @return {*}
-     */
-    getParameterFormElement( param ) {
-        let retval = null;
-        if ( param !== null && typeof param === 'object' ) {
-            if ( param.hasOwnProperty( 'type' ) ) {
-                switch ( param.type ) {
-                    case "boolean":
-                        retval = (<input type="checkbox" />);
-                        break;
-                    case "number":
-                        retval = (<input type="number" />);
-                        break;
-                    case "string":
-                        retval = (<input type="text" />);
-                        break;
-                }
-            }
-        }
-        return retval;
-    }
-
-
-    /**
      * Changes the checked state of the selection checkbox associated with this Algorithm component instance.
      *
      * Also dispatches an action to add this Algorithm to the algorithmsSelected key in the Redux application
@@ -292,6 +251,7 @@ class Algorithm extends React.Component {
     /**
      * Renders the HTML for this component to the DOM.
      *
+     * @since 1.0.0
      * @return {*}
      */
     render() {
