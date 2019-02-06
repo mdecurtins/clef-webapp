@@ -34,6 +34,11 @@ class FlatEmbedControls extends React.Component {
 
 
     /**
+     * Dispatches a MIR query.
+     *
+     * This method dispatches the execRequest action, which in turn performs an asynchronous call to the Clef REST API.
+     * The action takes the Flat.io editor instance (so it can call the Flat REST API), the currently selected algorithms,
+     * and the currently selected datasets.
      *
      * @since 1.0.0
      */
