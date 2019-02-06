@@ -512,13 +512,9 @@ export const getMusicData = function ( flatEditor ) {
         if ( flatEditor === null || typeof flatEditor === 'undefined' ) {
             dispatch( addError( 'Flat Embed instance is either null or undefined.' ) );
         } else {
-            console.log( 'Attempting to get MusicXML...' );
             flatEditor.getMusicXML()
                 .then( function ( xml ) {
-                    console.log( 'Got MusicXML: ' );
-                    console.log( xml );
                     dispatch( previousQuery( xml ) );
-
                 })
                 .catch( function ( err ) {
                     /** @var {Error} err */
@@ -530,7 +526,17 @@ export const getMusicData = function ( flatEditor ) {
     };
 };
 
-
+/**
+ * This thunk executes a Clef MIR search.
+ *
+ * This thunk makes two async requests using Promises and the JS Fetch API.
+ *
+ * @since 1.0.0
+ * @param {Embed} flatEditor The Flat.io editor Embed instance.
+ * @param {Array} selectedAlgorithms Algorithms to use in finding search results.
+ * @param {Array} selectedDatasets Datasets selected to query against.
+ * @return {Function}
+ */
 export const execRequest = function ( flatEditor, selectedAlgorithms, selectedDatasets ) {
     return function ( dispatch ) {
         if ( selectedAlgorithms.length === 0 || selectedDatasets.length === 0 ) {
@@ -538,6 +544,7 @@ export const execRequest = function ( flatEditor, selectedAlgorithms, selectedDa
         } else if ( flatEditor === null || typeof flatEditor === 'undefined' ) {
             dispatch( addError( 'Flat Embed instance is either null or undefined.' ) );
         } else {
+			// Grab the current contents of the music document in the Flat editor.
             flatEditor.getMusicXML()
                 .then( function ( xml ) {
                     // Set the value of the previousQuery key to the current query
@@ -568,7 +575,7 @@ export const execRequest = function ( flatEditor, selectedAlgorithms, selectedDa
                                 dispatch( searching( false ) );
                             }
                         }).catch( function ( err ) {
-                        /** @var err */
+                        /** @var {Error} err */
                         console.log( err );
                         dispatch( addError( err.message ) );
                     });
