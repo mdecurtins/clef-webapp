@@ -15,21 +15,28 @@ import {
     views
 } from "../../actions/ClefActions";
 
+/**
+ * Class to control the submission of a MIR query via the Flat.io editor.
+ *
+ * @since 1.0.0
+ */
 class FlatEmbedControls extends React.Component {
 
-    clearQuery() {
-
-    }
-
     render() {
+        // Need to add a handler for clearing the Flat.io editor and resetting the search.
         return (
             <div id="clef-search-controls">
-                <button className="clef-clear-search action-button" onClick={this.clearQuery.bind( this )}>Clear</button>
+                <button className="clef-clear-search action-button">Clear</button>
                 <button className="clef-submit-search action-button" onClick={this.submitQuery.bind( this )}>Search</button>
             </div>
         );
     }
 
+
+    /**
+     *
+     * @since 1.0.0
+     */
     submitQuery() {
         // Set searching status.
         this.props.setSearchingStatus( true );
@@ -44,14 +51,29 @@ class FlatEmbedControls extends React.Component {
         this.props.clearFilteredResults();
 
         // Get the current data in the Flat Embed as MusicXML and store it as the previous query.
-        //this.props.getMusic( this.props.flatEditor );
         this.props.doSearch( this.props.flatEditor, this.props.selectedAlgorithms, this.props.selectedDatasets );
     }
 
+
+    /**
+     * Method to test fetching and rendering result data.
+     *
+     * Move to separate unit/integration test package.
+     *
+     * @since 1.0.0
+     */
     testFetchData() {
         this.props.testData();
     }
 
+
+    /**
+     * Method to test fetching and rendering error messages.
+     *
+     * Move to separate unit/integration test package.
+     *
+     * @since 1.0.0
+     */
     testFetchErrors() {
         this.props.testErrors();
     }

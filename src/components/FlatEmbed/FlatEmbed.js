@@ -4,10 +4,18 @@ import './FlatEmbedStyles.css';
 import { connect } from 'react-redux';
 import { flatEmbed } from "../../actions/ClefActions";
 
-
+/**
+ * Class handling the Flat.io music notation editor.
+ *
+ * @since 1.0.0
+ */
 class FlatEmbed extends React.Component {
 
-
+    /**
+     * Post-initialization actions.
+     *
+     * @since 1.0.0
+     */
     componentDidMount() {
         // Create the Flat editor embed after the container has been rendered to the DOM.
         this.embed = this.getEmbed();
@@ -17,19 +25,32 @@ class FlatEmbed extends React.Component {
         this.props.setFlatEmbed( this.embed );
     }
 
+
     /**
-     * Creates a container for a Flat.io embedded editor
+     * Creates a container for a Flat.io embedded editor.
+     *
+     * Flat Score ID should in future be loaded via an API call or by reading from application config.
+     *
+     * @since 1.0.0
      */
     editor() {
-
+        // Call to the Flat.io JS API
         this.embed.loadFlatScore( '5a9c6cea1a24f30e79374258' ).then( function () {
             // Success.
+            // On fulfillment of this Promise, the Flat.io editor will contain the specified document.
         }).catch( function ( err ) {
             // Failure.
             console.log( err );
         });
     }
 
+
+    /**
+     * Instantiate the Flat.io music editor with the Flat.io app ID.
+     *
+     * @since 1.0.0
+     * @return {*}
+     */
     getEmbed() {
         const flatContainer = document.getElementById( 'flat-container' );
 
@@ -45,6 +66,13 @@ class FlatEmbed extends React.Component {
         });
     }
 
+
+    /**
+     * Render this component to the DOM.
+     *
+     * @since 1.0.0
+     * @return {*}
+     */
     render() {
         // Render a container and embed the Flat.io editor after this component mounts.
         return (
