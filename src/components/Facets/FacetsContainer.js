@@ -4,6 +4,11 @@ import FacetGroup from './FacetGroup';
 import './FacetsStyles.css';
 import {clearFilters, setFilters} from "../../actions/ClefActions";
 
+/**
+ * Class to display a faceted search widget.
+ *
+ * @since 1.0.0
+ */
 class FacetsContainer extends React.Component {
 
     constructor( props ) {
@@ -66,10 +71,12 @@ class FacetsContainer extends React.Component {
         return grouped;
     }
 
-    handleApplyFilters() {
 
-    }
-
+    /**
+     * Callback to clear filters.
+     *
+     * @since 1.0.0
+     */
     handleClearFilters() {
         this.props.clearFilters();
     }
@@ -80,7 +87,7 @@ class FacetsContainer extends React.Component {
                 {this.displayFacets()}
                 <div id="clef-facet-controls">
                     { this.props.facets.length > 0 ? <button onClick={this.handleClearFilters.bind(this)}>Clear Filters</button> : null }
-                    { this.props.facets.length > 0 ? <button onClick={this.handleApplyFilters.bind(this)}>Apply Filters</button> : null }
+                    { this.props.facets.length > 0 ? <button>Apply Filters</button> : null }
                 </div>
             </div>
         );
